@@ -6,8 +6,10 @@ var Pixlee = (function(Backbone, Marionette) {
 
     App.on('initialize:before', function(options) {
         //You can handle the options passed to the function start
-        App.photos = App.request("get:photos", options.photos);
-        App.rootRoute = "photowall";
+        // console.log('App.on initialize:before options: ', options);
+        // debugger;
+        App.photos = App.request("get:photos", options.photos); // gets entity photo collection;
+        App.rootRoute = "photowall"; // routes to Showphotowall
     });
 
 

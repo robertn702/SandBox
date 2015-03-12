@@ -12,3 +12,7 @@ window.JST = {};
 window.JST['photowall_layout'] = _.template(
     '<div id="photos_regions"></div><div id="pagination_region"></div>'
 );
+
+window.JST['photo_template'] = _.template(
+    "<img src='[%=big_url%]' alt='[%=photo_title%]'>"
+);

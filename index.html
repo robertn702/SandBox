@@ -11,7 +11,8 @@
 	<script type="text/javascript" src="javascripts/backbone/lib/utilities/navigation.js"></script>
 	<script type="text/javascript" src="javascripts/backbone/entities/photos.js"></script>
 	<script type="text/javascript" src="javascripts/backbone/apps/photowall/show/show_controller.js"></script>
-	<script type="text/javascript" src="/javascripts/backbone/apps/photowall/show/show_view.js"></script>
+	<script type="text/javascript" src="javascripts/backbone/apps/photowall/show/show_view.js"></script>
+	<script type="text/javascript" src="photoSeed.js"></script>
 	<style type="text/css" src="stylesheets/main.css"></style>
 </head>
 <body>
@@ -20,9 +21,9 @@
 	<div id="footer_region"></div>
 	<script type="text/javascript">
 		$(function() {
-			//YOu can pass the data to the global object Pixlee and handle it in main_app.js through the events before:initialize or after:initialize triggered at the app level
+			//You can pass the data to the global object Pixlee and handle it in main_app.js through the events before:initialize or after:initialize triggered at the app level
 		        Pixlee.start({
-		        		photos:[]
+		        		photos: photoSeed
 		        });
 		});
 	</script>

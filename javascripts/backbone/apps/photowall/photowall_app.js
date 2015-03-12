@@ -7,6 +7,7 @@ Pixlee.module('PhotowallApp', function(PhotowallApp, App, Backbone, Marionette, 
     });
     API = {
         showPhotowall: function(options) {
+            // console.log('showPhotowall options: ', options);
             return new PhotowallApp.Show.Controller({
                 region: App.main_region
             });

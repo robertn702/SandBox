@@ -9,8 +9,23 @@ Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, 
             this.view = this.getPhotowallView({
                 collection:photos
             });
-            //Show the view on the region passsed as an options
+            //Show the view on the region passed as an options
             region.show(this.view);
+
+            console.log('photos: ', photos);
+
+            var photoView = Marionette.ItemView.extend({
+                tagName: 'span',
+                template: 'photo_template'
+            })
+
+            var photosView = Marionette.CollectionView.extend({
+                itemView: photoView
+            })
+
+
+            $('#photos_regions').append(new photosView({collection:photos}).render().el);
+
             //Example of event handling
             this.listenTo(this.view,"show",function(){
 

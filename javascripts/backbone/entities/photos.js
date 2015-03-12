@@ -2,14 +2,14 @@ Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
     var _this = this,
         API, _API;
     API = {
-        getPhotosCollection: function(bootstrap, options) {
-            return new Entities.Photos(bootstrap || [], options || {});
+        getPhotosCollection: function(options) {
+            return new Entities.Photos(options.bootstrap || [], options.options || {});
         }
     };
     //You can add your custom work on the collection in Here,
     //e.g preloading the next 20 images
     // Paginate the list
-    Entities.Photo = Backbone.Collection.extend({
+    Entities.Photo = Backbone.Model.extend({
 
     });
     Entities.Photos = Backbone.Collection.extend({
