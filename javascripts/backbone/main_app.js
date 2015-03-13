@@ -12,7 +12,22 @@ var Pixlee = (function(Backbone, Marionette) {
         App.rootRoute = "photowall"; // routes to Showphotowall
     });
 
+    var window_region = Marionette.Region.extend({
+        el: $(window),
+        events: {
+            'scroll': 'scrolling'
+        },
+        initialize: function() {
+            _.bindAll(this, "scrolling");
+            this.scrolling();
+        },
+        scrolling: function() {
+            console.log('im scrolling');
+        }
+    })
+
     App.addRegions({
+        window_region: window_region,
         header_region: '#header_region',
         main_region: '#main_region',
         footer_region: '#footer_region'

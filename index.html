@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head>
 	<link rel="stylesheet" href="stylesheets/main.css">
 	<script type="text/javascript" src="javascripts/vendor/jquery/dist/jquery.js"></script>
@@ -34,18 +34,21 @@
 	<script type="text/javascript">
 		$(function() {
 			//You can pass the data to the global object Pixlee and handle it in main_app.js through the events before:initialize or after:initialize triggered at the app level
-      // $.get('https://distillery.pixlee.com/getJSON?api_key=EonmK92EIISMqSzaoJg&updated_at=2015-03-12T16:55:23Z&page=1&filter_id=10466&unique_id=49&per_page=10&sortType=')
-      // 		.done(function(data) {
-      // 			console.log('data: ', data)
-      // 			Pixlee.start({
-      // 				photos: data.data
-      // 			})
-      // 		})
-
 			Pixlee.start({
 				photos: []
 			})
 
+			var docHeight;
+			setInterval(function() {
+				docHeight = $(document).height();
+			}, 1000);
+
+			// $(window).scroll(function() {
+			//     if($(window).scrollTop() + $(window).height() == docHeight) {
+			//     	// console.log(App);
+			//     	  console.log('scrolled to the bottom of the page');
+			//     }
+			// });
 		});
 	</script>
 </body>

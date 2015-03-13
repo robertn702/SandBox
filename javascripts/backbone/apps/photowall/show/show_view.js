@@ -1,6 +1,18 @@
 Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, _) {
 	//This is the layout
     Show.PhotowallLayout = Marionette.Layout.extend({
+        initialize: function() {
+            $(window).on('scroll', _.bind(this.scrolling, this));
+        },
+        scrolling: function() {
+            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                // console.log(App);
+                App.request("get:photos", App.photos);
+            }
+        },
+        remove: function() {
+            $(window).off('scroll');
+        },
         template: 'photowall_layout',
         regions: {
             photos_region: "#photos_region",
@@ -31,6 +43,7 @@ Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, 
     Show.PhotosView = Marionette.CollectionView.extend({
         itemView: Show.PhotoView
     }),
+    //Pagination view
     Show.PaginationView = Marionette.ItemView.extend({
         tagName: 'button',
         className: 'more-button',

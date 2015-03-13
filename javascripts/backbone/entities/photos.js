@@ -1,11 +1,9 @@
 Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
     var _this = this,
-        API, _API;
+        API, _API, next, photosCollection;
 
     var API_KEY = 'EonmK92EIISMqSzaoJg';
     var page = 1;
-    var next;
-    var photosCollection;
 
     API = {
         getPhotosCollection: function(bootstrap, options) {
@@ -16,24 +14,25 @@ Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
 
             var filter_id = '10466';
 
+            //Get request to Pixlee API for more photos
             var getPhotos = function(pageNum) {
                 $.get('https://distillery.pixlee.com/getJSON?api_key='+API_KEY+'&updated_at=2015-03-12T16:55:23Z&page='+pageNum+'&filter_id='+filter_id+'&unique_id=49&per_page=10&sortType=')
                 .done(function(data) {
                     page++;
                     next = data.next;
-                    console.log("next page: ", page, ", next page avail?: ", next, ", data: ", data.data);
+                    // console.log("next page: ", page, ", next page avail?: ", next, ", data: ", data.data);
+                    console.log($(window).scrollTop());
                     photosCollection.add(data.data);
                 });
             };
 
+            //Check if more photos are available before making GET request
             if (page == 1) {
                 getPhotos(page);
-                console.log('getting first page of images');
             } else if (page > 1 && next == true) {
                 getPhotos(page + 1);
-                console.log('getting page ', page + 1, ' of images');
             } else {
-                console.log('not more photos');
+                console.log('no more photos');
             }
 
             return photosCollection;
@@ -49,8 +48,6 @@ Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
     Entities.Photos = Backbone.Collection.extend({
         model: Entities.Photo
     });
-
-    console.log('App.photos: ', App.photos);
 
     App.reqres.setHandlers({
         'get:photos': function(bootstrap, options) {
