@@ -1,0 +1,26 @@
+h1, h2, h3, nav, ul, li {
+  margin: none;
+  padding: none;
+  border: none;
+}
+
+body {
+  background-color: gray;
+}
+
+.wall-image img {
+  width: 50%;
+  float: right;
+}
+
+nav li {
+  display: inline;
+};
+
+#main_region {
+  overflow: auto;
+}
+
+#footer_region {
+  background-color:red;
+}

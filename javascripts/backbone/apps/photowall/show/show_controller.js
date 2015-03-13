@@ -2,32 +2,19 @@ Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, 
     Show.Controller = Marionette.Controller.extend({
         initialize: function(options) {
             var _this = this;
-            var region = options.region;
+            var region = options.region; // returns main_region
             //Get the photos Entities
             var photos = App.photos;
-            //Instantiate the view and pass parameter to it
-            this.view = this.getPhotowallView({
-                collection:photos
-            });
-            //Show the view on the region passed as an options
-            region.show(this.view);
+            //Instantiate the view and pass parameter to it (returns photowall layout)
+            this.view = this.getPhotowallView({collection:photos}); //Show the view on the region passed as an options
+            region.show(this.view); // shows the photowall layout on the main_region
 
-            console.log('photos: ', photos);
+            // ** Note to self this.view = photowall layout / region = main_region
 
-            var photoView = Marionette.ItemView.extend({
-                tagName: 'span',
-                template: 'photo_template'
-            })
-
-            var photosView = Marionette.CollectionView.extend({
-                itemView: photoView
-            })
-
-
-            $('#photos_regions').append(new photosView({collection:photos}).render().el);
+            // console.log('photos: ', photos);
 
             //Example of event handling
-            this.listenTo(this.view,"show",function(){
+            this.listenTo(this.view, "show", function(){
 
             },this);
         },

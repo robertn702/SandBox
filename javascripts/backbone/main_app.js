@@ -6,12 +6,11 @@ var Pixlee = (function(Backbone, Marionette) {
 
     App.on('initialize:before', function(options) {
         //You can handle the options passed to the function start
-        // console.log('App.on initialize:before options: ', options);
-        // debugger;
+        console.log('App.on initialize:before options: ', options);
         App.photos = App.request("get:photos", options.photos); // gets entity photo collection;
+        console.log('App.photos: ', App.photos);
         App.rootRoute = "photowall"; // routes to Showphotowall
     });
-
 
     App.addRegions({
         header_region: '#header_region',
@@ -19,13 +18,9 @@ var Pixlee = (function(Backbone, Marionette) {
         footer_region: '#footer_region'
     });
 
-
-
     App.reqres.setHandler('default:region', function() {
         return App.main_region;
     });
-
-
 
     App.on('initialize:after', function() {
         this.startHistory();
