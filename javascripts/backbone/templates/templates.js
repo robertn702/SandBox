@@ -8,15 +8,9 @@ _.templateSettings = {
 };
 
 window.JST = {};
-
 window.JST['photowall_layout'] = _.template(
     "<div id='photos_region'></div><div id='pagination_region'></div>"
 );
-
 window.JST['photo_template'] = _.template(
     "<a href='[%=platform_link%]' target='_blank'><img src='[%=big_url%]' alt='[%=photo_title%]'></a>"
 );
-
-window.JST['paginate_template'] = _.template(
-    "<span>Load More Images</span>"
-)

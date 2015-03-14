@@ -5,6 +5,7 @@ Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, 
             var region = options.region; // returns main_region
             //Get the photos Entities
             var photos = App.photos;
+            console.log(photos);
             //Instantiate the view and pass parameter to it (returns photowall layout)
             this.view = this.getPhotowallView({collection:photos}); //Show the view on the region passed as an options
             region.show(this.view); // shows the photowall layout on the main_region

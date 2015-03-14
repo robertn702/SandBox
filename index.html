@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="javascripts/vendor/underscore/underscore.js"></script>
 	<script type="text/javascript" src="javascripts/vendor/backbone/backbone.js"></script>
 	<script type="text/javascript" src="javascripts/vendor/marionette/lib/backbone.marionette.js"></script>
-	<script type="text/javascript" src="javascripts/vendor/waypoints/lib/jquery.waypoints.js"></script>
+	<script type="text/javascript" src="javascripts/vendor/querystring/querystring.js"></script>
 	<script type="text/javascript" src="javascripts/backbone/templates/templates.js"></script>
 	<script type="text/javascript" src="javascripts/config/renderer.js"></script>
 	<script type="text/javascript" src="javascripts/backbone/main_app.js"></script>
@@ -19,25 +19,23 @@
 <body>
 	<div id="header_region">
 		<header>
-			<h1>Photowall</h1>
-			<nav>
+<!-- 			<nav>
 				<ul>
 					<li><a href="">filter 1</a></li>
 					<li><a href="">filter 2</a></li>
 					<li><a href="">filter 3</a></li>
 				</ul>
-			</nav>
+			</nav> -->
 		</header>
 	</div>
 	<div id="main_region"></div>
-	<div id="footer_region">Footer</div>
+	<div id="footer_region"></div>
 	<script type="text/javascript">
 		$(function() {
 			//You can pass the data to the global object Pixlee and handle it in main_app.js through the events before:initialize or after:initialize triggered at the app level
 			Pixlee.start({
 				photos: []
 			});
-
 		});
 	</script>
 </body>

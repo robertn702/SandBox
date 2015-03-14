@@ -50,7 +50,8 @@
     "jquery-masonry": "3.1.5",
     "shadowbox": "3.0.3",
     "videojs": "~4.5.2",
-    "backbone": "~1.1.2"
+    "backbone": "~1.1.2",
+    "querystring": "~3.46.1"
   },
   "resolutions": {
     "underscore": "1.4.4 - 1.6.0",
