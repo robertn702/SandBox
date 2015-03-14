@@ -36,19 +36,8 @@
 			//You can pass the data to the global object Pixlee and handle it in main_app.js through the events before:initialize or after:initialize triggered at the app level
 			Pixlee.start({
 				photos: []
-			})
+			});
 
-			var docHeight;
-			setInterval(function() {
-				docHeight = $(document).height();
-			}, 1000);
-
-			// $(window).scroll(function() {
-			//     if($(window).scrollTop() + $(window).height() == docHeight) {
-			//     	// console.log(App);
-			//     	  console.log('scrolled to the bottom of the page');
-			//     }
-			// });
 		});
 	</script>
 </body>

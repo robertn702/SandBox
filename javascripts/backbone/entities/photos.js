@@ -1,38 +1,74 @@
 Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
     var _this = this,
-        API, _API, next, photosCollection;
+        API, _API,
+        next,
+        photosCollection,
+        photoQueue = [];
 
     var API_KEY = 'EonmK92EIISMqSzaoJg';
-    var page = 1;
+    var nextPage = 1;
 
     API = {
         getPhotosCollection: function(bootstrap, options) {
-            // var photosCollection = new Entities.Photos(options.bootstrap || [], options.options || {});
-            if (page == 1) {
+            var filter_id = '10466';
+
+            if (nextPage == 1) {
                 photosCollection = new Entities.Photos(bootstrap.bootstrap || [], options || {});
             }
 
-            var filter_id = '10466';
+
+            var bootstrapPhotos = function(data) {
+                console.log('bootstrapping photos from page: ', nextPage);
+
+                nextPage++;
+                next = data.next;
+                photosCollection.add(data.data);
+                if (next === true) {
+                    getPhotos(nextPage, 'queue');
+                }
+            };
+
+            var queuePhotos = function(data) {
+                console.log('queueing photos from page: ', nextPage);
+
+                next = data.next;
+                photoQueue = data.data;
+            };
+
+            var dequeuePhotos = function() {
+                console.log('dequeueing photos from page: ', nextPage);
+
+                nextPage++;
+                photosCollection.add(photoQueue);
+                photoQueue = [];
+            };
+
+            var loadPhotos = function(data, action) {
+                if (action === 'add') {
+                    bootstrapPhotos(data);
+                } else if (action === 'queue') {
+                    queuePhotos(data);
+                }
+            }
 
             //Get request to Pixlee API for more photos
-            var getPhotos = function(pageNum) {
-                $.get('https://distillery.pixlee.com/getJSON?api_key='+API_KEY+'&updated_at=2015-03-12T16:55:23Z&page='+pageNum+'&filter_id='+filter_id+'&unique_id=49&per_page=10&sortType=')
+            var getPhotos = function(pageNum, action) {
+                $.get('https://distillery.pixlee.com/getJSON?api_key='+API_KEY+'&updated_at=2015-03-12T16:55:23Z&page='+pageNum+'&filter_id='+filter_id+'&unique_id=49&per_page=20&sortType=')
                 .done(function(data) {
-                    page++;
-                    next = data.next;
-                    // console.log("next page: ", page, ", next page avail?: ", next, ", data: ", data.data);
-                    console.log($(window).scrollTop());
-                    photosCollection.add(data.data);
+                    console.log('data: ', data);
+                    loadPhotos(data, action)
                 });
             };
 
+
             //Check if more photos are available before making GET request
-            if (page == 1) {
-                getPhotos(page);
-            } else if (page > 1 && next == true) {
-                getPhotos(page + 1);
+            if (nextPage === 1) {
+                getPhotos(nextPage, 'add'); // nextPage ==== 1
+            } else if (nextPage > 1 && next === true) {
+                dequeuePhotos();
+                getPhotos(nextPage, 'queue');
             } else {
-                console.log('no more photos');
+                console.log('all photos displayed');
             }
 
             return photosCollection;
@@ -41,19 +77,12 @@ Pixlee.module('Entities', function(Entities, App, Backbone, Marionette, $, _) {
     //You can add your custom work on the collection in Here,
     //e.g preloading the next 20 images
     // Paginate the list
-    Entities.Photo = Backbone.Model.extend({
-
-    });
-
+    Entities.Photo = Backbone.Model.extend({});
     Entities.Photos = Backbone.Collection.extend({
         model: Entities.Photo
     });
-
     App.reqres.setHandlers({
         'get:photos': function(bootstrap, options) {
-            console.log('get:photos bootstrap: ', bootstrap);
-            // console.log('get:photos options: ', options);
-
             return API.getPhotosCollection({
                 bootstrap: bootstrap,
                 options: options

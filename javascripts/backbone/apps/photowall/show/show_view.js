@@ -6,7 +6,6 @@ Pixlee.module('PhotowallApp.Show', function(Show, App, Backbone, Marionette, $, 
         },
         scrolling: function() {
             if($(window).scrollTop() + $(window).height() == $(document).height()) {
-                // console.log(App);
                 App.request("get:photos", App.photos);
             }
         },
